@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Untuk Cindy — 19 September</title>
+<meta name="description" content="Sebuah surat kecil dan kumpulan kenangan untuk Cindy Aulia Nurhikmah." />
+
+<link rel="icon" type="image/png" href="assets/images/A&amp;C.png" />
+<link rel="apple-touch-icon" href="assets/images/A&amp;C.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+<!-- ============ LAPISAN AMBIENT (cahaya lembut + bintang berkedip) ============ -->
+<div class="bg-ambience" aria-hidden="true">
+  <div class="bg-ambience__glow bg-ambience__glow--1"></div>
+  <div class="bg-ambience__glow bg-ambience__glow--2"></div>
+  <div class="bg-ambience__glow bg-ambience__glow--3"></div>
+  <div class="bg-ambience__stars" id="bg-stars"></div>
+  <div class="bg-ambience__shooting-stars" id="bg-shooting-stars"></div>
+</div>
+
+<!-- ============ LOADING SCREEN ============ -->
+<div class="loading-screen" id="loading-screen" aria-hidden="false">
+  <div class="loading-screen__scene" id="loading-scene"></div>
+  <p class="loading-screen__label">Menyiapkan sedikit kejutan...</p>
+</div>
+
+<!-- ============ SAMPUL / AMPLOP ============ -->
+<section id="cover" class="cover">
+  <div class="cover__inner">
+    <p class="cover__label" id="cover-label"></p>
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Buka surat">
+      <div class="envelope__shadow"></div>
+      <div class="envelope__body">
+        <div class="envelope__flap"></div>
+        <div class="envelope__letter"></div>
+        <div class="envelope__seal">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M12 21s-7.5-4.6-10.2-9.3C.2 8.9 1.4 5.7 4.3 4.8c2-.6 4 .1 5.2 1.9L12 9.4l2.5-2.7c1.2-1.8 3.2-2.5 5.2-1.9 2.9.9 4.1 4.1 2.5 6.9C19.5 16.4 12 21 12 21z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="cover__name" id="cover-name"></p>
+    <p class="cover__hint" id="cover-hint"></p>
+  </div>
+</section>
+
+<!-- ============ KONTEN UTAMA (tersembunyi sampai amplop dibuka) ============ -->
+<div id="site" class="site" aria-hidden="true">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="hero">
+    <div class="hero__media">
+      <img id="hero-image" src="" alt="" />
+      <div class="hero__gradient"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__eyebrow" id="hero-eyebrow"></p>
+      <h1 class="hero__title" id="hero-title"></h1>
+      <p class="hero__subtitle" id="hero-subtitle"></p>
+      <p class="hero__countdown" id="hero-countdown"></p>
+    </div>
+    <div class="hero__scroll" id="hero-scroll">
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ============ SURAT PEMBUKA ============ -->
+  <section class="letter" id="letter">
+    <div class="letter__card reveal">
+      <h2 class="letter__heading" id="letter-heading"></h2>
+      <div class="letter__body" id="letter-body"></div>
+      <p class="letter__signature" id="letter-signature"></p>
+    </div>
+  </section>
+
+  <!-- ============ BABAK KENANGAN (diisi oleh main.js) ============ -->
+  <main id="moments" class="moments"></main>
+
+  <!-- ============ VIDEO HIGHLIGHT ============ -->
+  <section class="video-section" id="video-section">
+    <div class="video-section__text reveal">
+      <h2 id="video-heading"></h2>
+      <p id="video-description"></p>
+    </div>
+    <div class="video-section__player reveal">
+      <video id="video-player" controls preload="metadata" playsinline>
+        <source id="video-source" src="" type="video/mp4" />
+        Browser kamu tidak mendukung pemutaran video.
+      </video>
+    </div>
+  </section>
+
+  <!-- ============ PENUTUP ============ -->
+  <section class="closing" id="closing">
+    <div class="closing__media reveal">
+      <img id="closing-image" src="" alt="" />
+    </div>
+    <div class="closing__content reveal">
+      <h2 id="closing-heading"></h2>
+      <div id="closing-body"></div>
+
+      <button class="heart-button" id="heart-button" aria-label="Ketuk hati ini">
+        <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+          <path fill="currentColor" d="M12 21s-7.5-4.6-10.2-9.3C.2 8.9 1.4 5.7 4.3 4.8c2-.6 4 .1 5.2 1.9L12 9.4l2.5-2.7c1.2-1.8 3.2-2.5 5.2-1.9 2.9.9 4.1 4.1 2.5 6.9C19.5 16.4 12 21 12 21z"/>
+        </svg>
+      </button>
+      <p class="closing__hint" id="closing-heart-hint"></p>
+      <p class="closing__signature" id="closing-signature"></p>
+
+      <button class="share-button" id="share-button" type="button">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path fill="currentColor" d="M17 7h-3v2h3a3 3 0 1 1 0 6h-3v2h3a5 5 0 0 0 0-10zM7 15H4a3 3 0 1 1 0-6h3V7H4a5 5 0 0 0 0 10h3v-2zm-1-4h8v2H6v-2z"/>
+        </svg>
+        <span id="share-button-label"></span>
+      </button>
+    </div>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+  </section>
+
+</div>
+
+<!-- ============ UCAPAN MELAYANG (muncul setelah hati diketuk) ============ -->
+<div class="wish" id="wish" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="wish__hearts" id="wish-hearts" aria-hidden="true"></div>
+  <div class="wish__photos" id="wish-photos" aria-hidden="true"></div>
+  <div class="wish__card" id="wish-card">
+    <svg class="wish__icon" viewBox="0 0 24 24" width="40" height="40" aria-hidden="true">
+      <path fill="currentColor" d="M12 21s-7.5-4.6-10.2-9.3C.2 8.9 1.4 5.7 4.3 4.8c2-.6 4 .1 5.2 1.9L12 9.4l2.5-2.7c1.2-1.8 3.2-2.5 5.2-1.9 2.9.9 4.1 4.1 2.5 6.9C19.5 16.4 12 21 12 21z"/>
+    </svg>
+    <h2 class="wish__heading" id="wish-heading"></h2>
+    <p class="wish__message" id="wish-message"></p>
+    <button class="wish__close" id="wish-close" type="button"></button>
+  </div>
+</div>
+
+<!-- ============ PEMUTAR LAGU (mengambang) ============ -->
+<div class="player" id="player" aria-hidden="true">
+  <button class="player__toggle" id="player-toggle" aria-label="Putar lagu">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <path fill="currentColor" d="M8 5v14l11-7z"/>
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="display:none">
+      <path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/>
+    </svg>
+  </button>
+  <div class="player__info">
+    <span class="player__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="player__title" id="player-title"></span>
+  </div>
+  <button class="player__mute" id="player-mute" aria-label="Bisukan lagu">
+    <svg class="icon-sound" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+      <path fill="currentColor" d="M4 9v6h4l5 5V4L8 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 15.5 12z"/>
+    </svg>
+    <svg class="icon-muted" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" style="display:none">
+      <path fill="currentColor" d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.45 2.45c.03-.2.05-.43.05-.65zM4 9v6h4l5 5v-4.2l-6-6H4zm14.73-5L3 18.73 4.27 20l16-16z"/>
+    </svg>
+  </button>
+  <audio id="bgm" loop preload="auto">
+    <source id="bgm-source" src="" type="audio/mpeg" />
+  </audio>
+</div>
+
+<script src="js/content.js"></script>
+<script src="js/main.js"></script>
+<script src="js/scroll-controller.js"></script>
+<script src="js/audio-controller.js"></script>
+<script src="js/interaction-controller.js"></script>
+<script src="js/loading-controller.js"></script>
+<script src="js/background-controller.js"></script>
+</body>
+</html>

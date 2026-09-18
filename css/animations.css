@@ -1,0 +1,214 @@
+/* ==========================================================
+   AMBIENT BACKGROUND — cahaya mengambang & bintang berkedip
+   (elemen & container-nya ada di index.html, styling posisi
+   di style.css; bintang dibuat oleh background-controller.js)
+   ========================================================== */
+@keyframes glowDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(4%, -6%) scale(1.08); }
+  66%  { transform: translate(-5%, 4%) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50%      { opacity: var(--peak, 0.95); transform: scale(1.25); }
+}
+
+@keyframes shootingStarMove {
+  0%   { opacity: 0; transform: rotate(var(--angle)) translateX(0); }
+  8%   { opacity: 1; }
+  75%  { opacity: 0.9; }
+  100% { opacity: 0; transform: rotate(var(--angle)) translateX(var(--travel, 260px)); }
+}
+
+/* ==========================================================
+   SCROLL REVEAL
+   Elemen dengan class .reveal mulai tersembunyi & sedikit turun,
+   lalu muncul halus saat masuk viewport (lihat scroll-controller.js)
+   ========================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger untuk grid foto: tiap foto muncul berurutan */
+.moment__grid .photo-frame {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+}
+.moment__grid.is-visible .photo-frame {
+  opacity: 1;
+  transform: translateY(0);
+}
+.moment__grid.is-visible .photo-frame:nth-child(1) { transition-delay: 60ms; }
+.moment__grid.is-visible .photo-frame:nth-child(2) { transition-delay: 140ms; }
+.moment__grid.is-visible .photo-frame:nth-child(3) { transition-delay: 220ms; }
+.moment__grid.is-visible .photo-frame:nth-child(4) { transition-delay: 300ms; }
+.moment__grid.is-visible .photo-frame:nth-child(5) { transition-delay: 380ms; }
+.moment__grid.is-visible .photo-frame:nth-child(6) { transition-delay: 460ms; }
+
+/* ==========================================================
+   MARQUEE (baris foto auto-geser)
+   Track berisi daftar foto yang diduplikasi sekali oleh main.js,
+   lalu digeser dari 0 sampai -50% supaya terlihat menyambung terus.
+   ========================================================== */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ==========================================================
+   HERO SCROLL DOT
+   ========================================================== */
+@keyframes scrollDot {
+  0%   { opacity: 0; transform: translateY(0); }
+  30%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+/* ==========================================================
+   AUDIO PLAYER BARS
+   ========================================================== */
+@keyframes barBounce {
+  0%, 100% { height: 4px; }
+  50% { height: 12px; }
+}
+.player__bars i:nth-child(1) { height: 6px; }
+.player__bars i:nth-child(2) { height: 10px; }
+.player__bars i:nth-child(3) { height: 5px; }
+
+/* ==========================================================
+   HEART BUTTON PULSE (saat diketuk)
+   ========================================================== */
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.28); }
+  60%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.heart-button.is-popped { animation: heartPop 520ms var(--ease); }
+
+/* ==========================================================
+   CONFETTI
+   Dibuat secara dinamis oleh interaction-controller.js sebagai
+   <span class="confetti-piece"> lalu jatuh & berputar.
+   ========================================================== */
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0.9;
+  animation-name: confettiFall;
+  animation-timing-function: cubic-bezier(.35,.6,.4,1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--drift, 40px), 62vh) rotate(var(--spin, 320deg));
+    opacity: 0;
+  }
+}
+
+/* ==========================================================
+   FADE-IN COVER NAME/LABEL ON LOAD
+   ========================================================== */
+@keyframes softFadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cover__label,
+.cover__name,
+.cover__hint {
+  animation: softFadeUp 900ms var(--ease) both;
+}
+.cover__label { animation-delay: 100ms; }
+.envelope { animation: softFadeUp 900ms var(--ease) both; animation-delay: 220ms; }
+.cover__name { animation-delay: 340ms; }
+.cover__hint { animation-delay: 440ms; }
+
+/* ==========================================================
+   UCAPAN MELAYANG — kartu naik, kata demi kata, hati berdetak
+   (elemen #wish ada di index.html, digerakkan oleh
+   WishOverlay di js/interaction-controller.js)
+   ========================================================== */
+@keyframes wishCardIn {
+  0% {
+    opacity: 0;
+    transform: translateY(46px) scale(0.92);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes wishWordIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.18); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.12); }
+  56%      { transform: scale(1); }
+}
+
+@keyframes wishPhotoIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(0.7) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1) translateY(0);
+  }
+}
+
+/* ==========================================================
+   LOADING SCREEN — hati kecil melayang naik
+   ========================================================== */
+@keyframes heartFloat {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.75);
+    opacity: 0;
+  }
+  12% { opacity: 0.9; }
+  50% {
+    transform: translateY(-52vh) translateX(var(--drift, 20px)) rotate(8deg) scale(1);
+  }
+  88% { opacity: 0.8; }
+  100% {
+    transform: translateY(-108vh) translateX(calc(var(--drift, 20px) * -1)) rotate(-6deg) scale(0.9);
+    opacity: 0;
+  }
+}
