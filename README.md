@@ -2,7 +2,8 @@
 
 Website ucapan ulang tahun untuk **Cindy Aulia Nurhikmah**, 19 September 2026.
 Konsep: "surat malam" — amplop yang dibuka, surat singkat, tiga babak kenangan
-foto, satu video highlight, lagu latar, dan penutup interaktif.
+foto, satu video highlight, lagu latar, dan penutup interaktif. 
+(https://adnanfthr.github.io/birthday-cindy-2026/)
 
 ## 1. Cara membuka di komputer kamu
 
